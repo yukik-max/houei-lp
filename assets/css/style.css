@@ -11,7 +11,7 @@
   --ink-soft:#8a8178;      /* 補助テキスト */
   --line:#e3ded3;          /* 区切り線 */
   --green:#5f7a3f;         /* 任意項目バー */
-  --maxw:1366px;
+  --maxw:960px;            /* LP全体の最大幅（小さくしたい時はここの数値を下げる） */
 }
 
 *{box-sizing:border-box}
