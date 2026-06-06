@@ -1,0 +1,203 @@
+/* ===== ホーエーホーム 完成見学会 LP =====
+   方針: Figmaデザイン（各セクション1枚絵）を忠実に表示し、
+   ナビ・予約ボタン・申込みフォームのみ実働HTMLで実装。
+   フォント: 筑紫A丸ゴシック(画像内で再現) ／ HTML部はZen Maru Gothicで近似 */
+
+:root{
+  --crimson:#d84e76;       /* 予約ボタン・必須バッジ */
+  --crimson-dark:#c33f66;
+  --cream:#f9f4ee;         /* 背景クリーム */
+  --ink:#4a4039;           /* 本文ブラウン */
+  --ink-soft:#8a8178;      /* 補助テキスト */
+  --line:#e3ded3;          /* 区切り線 */
+  --green:#5f7a3f;         /* 任意項目バー */
+  --maxw:1366px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--ink);
+  font-family:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+
+/* ---- LP本体（中央寄せ・最大1366px） ---- */
+.lp{max-width:var(--maxw);margin:0 auto;background:var(--cream)}
+.sec{position:relative;font-size:0}            /* 画像の隙間防止 */
+.sec > img{width:100%}
+/* 追従ナビ高さ分のアンカーオフセット */
+.sec{scroll-margin-top:64px}
+
+/* ---- ヒーローの透明クリック領域 ---- */
+.hero .img-wrap{position:relative}
+.hot{position:absolute;display:block;z-index:2}
+/* デバッグ用: .hot{background:rgba(255,0,0,.25)} */
+
+/* ---- 追従ナビ（スクロールで出現） ---- */
+.site-nav{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  background:rgba(255,255,255,.96);
+  box-shadow:0 2px 14px rgba(80,60,40,.12);
+  transform:translateY(-100%);
+  transition:transform .35s ease;
+  backdrop-filter:saturate(1.1) blur(2px);
+}
+.site-nav.visible{transform:translateY(0)}
+.nav-inner{
+  max-width:var(--maxw);margin:0 auto;
+  display:flex;align-items:center;gap:18px;
+  padding:8px 20px;
+}
+.nav-logo img{height:34px;width:auto}
+.nav-links{margin-left:auto;display:flex;gap:26px}
+.nav-links a{
+  font-weight:700;font-size:15px;color:var(--ink);
+  position:relative;padding:4px 0;transition:color .2s;
+}
+.nav-links a:hover{color:var(--crimson)}
+.nav-cta{
+  background:var(--crimson);color:#fff;font-weight:700;font-size:14px;
+  padding:10px 18px;border-radius:999px;white-space:nowrap;
+  box-shadow:0 4px 12px rgba(216,78,118,.35);transition:background .2s,transform .15s;
+}
+.nav-cta:hover{background:var(--crimson-dark);transform:translateY(-1px)}
+
+/* ===== 申込みフォーム ===== */
+.hp{position:absolute!important;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+.form-sec{background:var(--cream)}
+.form-head-img{width:100%}
+.form-wrap{
+  max-width:680px;margin:0 auto;
+  padding:36px 22px 70px;
+}
+.reserve-form{
+  background:#fff;border-radius:18px;
+  box-shadow:0 8px 30px rgba(120,90,60,.10);
+  padding:34px 30px;
+}
+.fg{margin:0}
+.fg + .fg{margin-top:22px}
+legend,.lbl-row{padding:0;display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.lbl{font-weight:700;font-size:18px;color:var(--ink)}
+.req{
+  background:var(--crimson);color:#fff;font-size:12px;font-weight:700;
+  padding:3px 10px;border-radius:6px;line-height:1;
+}
+.help{margin:0 0 12px;font-size:13px;color:var(--ink-soft)}
+.fg{border:0}
+fieldset.fg{margin:0;padding:0}
+
+/* ラジオ */
+.opts{display:flex;flex-direction:column;gap:2px}
+.opt{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 6px;cursor:pointer;font-size:16px;font-weight:500;
+  border-bottom:1px solid #f1ede4;
+}
+.opt:last-child{border-bottom:0}
+.opt input{
+  appearance:none;-webkit-appearance:none;
+  width:20px;height:20px;border:2px solid #c9c2b6;border-radius:50%;
+  display:grid;place-content:center;flex:0 0 auto;transition:border-color .2s;
+}
+.opt input::before{
+  content:"";width:10px;height:10px;border-radius:50%;
+  transform:scale(0);transition:transform .15s;background:var(--crimson);
+}
+.opt input:checked{border-color:var(--crimson)}
+.opt input:checked::before{transform:scale(1)}
+.opt:has(input:checked){color:var(--crimson-dark)}
+
+/* テキスト入力 */
+input[type=text],input[type=tel],input[type=email],select,textarea{
+  width:100%;font:inherit;font-size:16px;color:var(--ink);
+  padding:13px 14px;border:1px solid #cfc9bd;border-radius:10px;
+  background:#fff;transition:border-color .2s,box-shadow .2s;
+}
+input::placeholder,textarea::placeholder{color:#bdb6aa}
+input:focus,select:focus,textarea:focus{
+  outline:none;border-color:var(--crimson);
+  box-shadow:0 0 0 3px rgba(216,78,118,.14);
+}
+input.invalid,select.invalid{border-color:var(--crimson);background:#fff7f9}
+textarea{resize:vertical}
+
+.div{border:0;border-top:1px solid var(--line);margin:22px 0}
+
+/* 任意項目バー */
+.optional-toggle{
+  width:100%;text-align:left;cursor:pointer;
+  background:#eceadc;color:var(--green);font-weight:700;font-size:16px;
+  border:0;border-radius:10px;padding:15px 18px;margin-top:4px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.optional-toggle .chev{font-size:18px;transition:transform .2s}
+.optional-toggle[aria-expanded=true] .chev{transform:rotate(45deg)}
+.optional-body{padding-top:20px}
+.optional-body .fg + .fg{margin-top:18px}
+
+/* 送信ボタン */
+.submit{
+  display:block;width:min(420px,100%);margin:30px auto 0;
+  background:var(--crimson);color:#fff;font-family:inherit;font-weight:700;font-size:19px;
+  border:0;border-radius:999px;padding:17px 20px;cursor:pointer;
+  box-shadow:0 8px 20px rgba(216,78,118,.35);transition:background .2s,transform .15s;
+}
+.submit:hover{background:var(--crimson-dark);transform:translateY(-2px)}
+.submit:active{transform:translateY(0)}
+.submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
+
+.err-summary{
+  color:var(--crimson-dark);font-weight:700;font-size:14px;
+  background:#fdeef2;border-radius:10px;padding:12px 14px;margin:18px 0 0;
+}
+.privacy-note{text-align:center;font-size:12px;color:var(--ink-soft);margin:16px 0 0}
+
+/* 送信完了 */
+.thanks{
+  background:#fff;border-radius:18px;text-align:center;
+  padding:60px 28px;box-shadow:0 8px 30px rgba(120,90,60,.10);
+}
+.thanks h2{color:var(--crimson-dark);font-size:24px;margin:0 0 16px}
+.thanks p{color:var(--ink);line-height:1.9;margin:0}
+
+/* ===== フッター ===== */
+.site-footer{
+  background:#fff;text-align:center;
+  padding:44px 20px;color:var(--ink);
+  border-top:1px solid var(--line);
+}
+.foot-logo{height:40px;width:auto;margin:0 auto 14px}
+.foot-name{font-weight:700;font-size:17px;margin:0 0 8px}
+.foot-addr,.foot-tel{font-size:13px;color:var(--ink-soft);margin:2px 0;line-height:1.8}
+.foot-copy{font-size:12px;color:var(--ink-soft);margin:18px 0 0}
+
+/* ===== モバイル固定CTA ===== */
+.floating-cta{
+  position:fixed;left:50%;transform:translateX(-50%);bottom:14px;z-index:40;
+  background:var(--crimson);color:#fff;font-weight:700;font-size:16px;
+  padding:15px 40px;border-radius:999px;
+  box-shadow:0 8px 22px rgba(216,78,118,.45);
+  display:none;
+}
+.floating-cta.hide{opacity:0;pointer-events:none;transition:opacity .25s}
+
+/* ===== レスポンシブ ===== */
+@media (max-width:768px){
+  .nav-links{display:none}
+  .nav-inner{padding:7px 14px}
+  .nav-logo img{height:30px}
+  .reserve-form{padding:24px 16px}
+  .form-wrap{padding:26px 14px 90px}
+  .lbl{font-size:17px}
+  .floating-cta{display:inline-block}
+}
+@media (max-width:380px){
+  .floating-cta{padding:14px 30px;font-size:15px}
+}
