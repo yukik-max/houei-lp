@@ -167,6 +167,39 @@ textarea{resize:vertical}
 .thanks h2{color:var(--crimson-dark);font-size:24px;margin:0 0 16px}
 .thanks p{color:var(--ink);line-height:1.9;margin:0}
 
+/* ===== お施主さまの声 ===== */
+.voice-sec{background:var(--cream)}
+.voice-head-img{width:100%}
+.voice-wrap{max-width:720px;margin:0 auto;padding:6px 22px 56px}
+.voice-card{
+  background:#fff;border-radius:18px;overflow:hidden;
+  box-shadow:0 8px 26px rgba(120,90,60,.10);
+  margin-bottom:28px;
+}
+.voice-photos{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.voice-photos img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.voice-body{padding:20px 22px 18px}
+.voice-name{color:var(--green);font-size:19px;font-weight:700;margin:0 0 12px}
+.voice-kikkake{font-size:15px;line-height:1.85;margin:0 0 16px}
+.voice-kikkake .tag{
+  display:inline-block;background:#eef1e6;color:var(--green);
+  font-weight:700;font-size:12px;padding:3px 10px;border-radius:6px;margin-right:8px;
+}
+.voice-detail{border-top:1px dashed var(--line);padding-top:14px}
+.voice-detail summary{
+  display:flex;justify-content:space-between;align-items:center;cursor:pointer;
+  list-style:none;font-weight:700;font-size:15px;color:var(--crimson-dark);
+  background:#fdeef2;border-radius:10px;padding:13px 16px;
+}
+.voice-detail summary::-webkit-details-marker{display:none}
+.voice-detail summary::after{content:"＋";font-size:16px;line-height:1}
+.voice-detail[open] summary::after{content:"−"}
+.voice-detail .qa{padding:16px 4px 2px}
+.voice-detail .qa p{font-size:14px;line-height:1.85;margin:0 0 15px}
+.voice-detail .qa p:last-child{margin-bottom:0}
+.voice-detail .qa strong{display:block;color:var(--ink);font-weight:700;margin-bottom:3px}
+.voice-from{text-align:right;font-size:12px;color:var(--ink-soft);margin:14px 0 0}
+
 /* ===== フッター ===== */
 .site-footer{
   background:#fff;text-align:center;
