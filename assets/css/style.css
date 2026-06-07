@@ -168,7 +168,14 @@ textarea{resize:vertical}
 .thanks p{color:var(--ink);line-height:1.9;margin:0}
 
 /* ===== お施主さまの声 ===== */
-.voice-sec{background:var(--cream)}
+/* 他セクション(画像)と同じ方眼背景をCSSで再現（セル約30px・淡いクリーム罫線） */
+.voice-sec{
+  background-color:#fdfbf4;
+  background-image:
+    linear-gradient(to right, rgba(199,181,146,.22) 0 1.5px, transparent 1.5px),
+    linear-gradient(to bottom, rgba(199,181,146,.22) 0 1.5px, transparent 1.5px);
+  background-size:30px 30px;
+}
 .voice-head-img{width:100%}
 .voice-wrap{max-width:720px;margin:0 auto;padding:6px 22px 56px}
 .voice-card{
