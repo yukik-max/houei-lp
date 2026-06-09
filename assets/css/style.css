@@ -215,9 +215,17 @@ textarea{resize:vertical}
   border-top:1px solid var(--line);
 }
 .foot-logo{height:40px;width:auto;margin:0 auto 14px}
-.foot-name{font-weight:700;font-size:17px;margin:0 0 8px}
-.foot-addr,.foot-tel{font-size:13px;color:var(--ink-soft);margin:2px 0;line-height:1.8}
-.foot-copy{font-size:12px;color:var(--ink-soft);margin:18px 0 0}
+.foot-name{font-weight:700;font-size:17px;margin:0 0 14px}
+.foot-free{margin:0;font-size:27px;font-weight:700;color:var(--crimson-dark);letter-spacing:.02em;line-height:1.2}
+.foot-free a{color:inherit;text-decoration:none}
+.foot-hours{font-size:13px;color:var(--ink-soft);margin:5px 0 24px}
+.foot-offices{display:flex;justify-content:center;gap:38px;flex-wrap:wrap;max-width:700px;margin:0 auto 22px}
+.foot-office{font-size:13px;line-height:1.85}
+.foot-office-name{font-weight:700;color:var(--ink);margin:0 0 4px}
+.foot-office-addr{color:var(--ink-soft);margin:0}
+.foot-office-tel{color:var(--ink-soft);margin:2px 0 0}
+.foot-office-tel a{color:var(--ink);text-decoration:none;font-weight:700}
+.foot-copy{font-size:12px;color:var(--ink-soft);margin:8px 0 0}
 
 /* ===== モバイル固定CTA ===== */
 .floating-cta{
