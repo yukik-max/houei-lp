@@ -3,3 +3,6 @@ Thumbs.db
 output/
 *.log
 .figma_token
+# FTP認証情報（絶対にコミットしない）
+FileZilla.xml
+*.xml
