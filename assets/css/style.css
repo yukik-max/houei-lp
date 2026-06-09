@@ -37,7 +37,7 @@ a{color:inherit;text-decoration:none}
 /* ---- ヒーローの透明クリック領域 ---- */
 .hero .img-wrap{position:relative}
 .hot{position:absolute;display:block;z-index:2}
-/* デバッグ用: .hot{background:rgba(255,0,0,.25)} */
+/* デバッグ用: .hot{background:rgba(255,0,0,.3)} */
 
 /* ---- 追従ナビ（スクロールで出現） ---- */
 .site-nav{
