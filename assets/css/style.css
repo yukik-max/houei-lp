@@ -168,15 +168,16 @@ textarea{resize:vertical}
 .thanks p{color:var(--ink);line-height:1.9;margin:0}
 
 /* ===== お施主さまの声 ===== */
-/* 他セクション(画像)と同じ方眼背景をCSSで再現（セル約30px・淡いクリーム罫線） */
+/* 他セクションの本物のグリッドを帯状に切り出して敷く。
+   background-size:100% で見出し画像と同じ幅に拡大→罫線色・太さ・セル寸法・縦線位置が完全一致 */
 .voice-sec{
-  background-color:#fdfbf4;
-  background-image:
-    linear-gradient(to right, rgba(199,181,146,.22) 0 1.5px, transparent 1.5px),
-    linear-gradient(to bottom, rgba(199,181,146,.22) 0 1.5px, transparent 1.5px);
-  background-size:30px 30px;
+  background-color:#fdfaf5;
+  background-image:url(../img/grid_strip.webp);
+  background-repeat:repeat-y;
+  background-size:100% auto;
+  background-position:top left;
 }
-.voice-head-img{width:100%}
+.voice-head-img{width:100%;display:block}
 .voice-wrap{max-width:720px;margin:0 auto;padding:6px 22px 56px}
 .voice-card{
   background:#fff;border-radius:18px;overflow:hidden;
