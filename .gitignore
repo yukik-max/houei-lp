@@ -6,3 +6,5 @@ output/
 # FTP認証情報（絶対にコミットしない）
 FileZilla.xml
 *.xml
+# 通知先メール（Secretからデプロイ時に生成・コミットしない）
+mail_config.php

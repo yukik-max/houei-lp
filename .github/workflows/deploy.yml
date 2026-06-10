@@ -15,6 +15,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # 通知先メールをSecretから生成（リポジトリには含めない）
+      - name: Generate mail config
+        if: env.HAS_FTP == 'true'
+        env:
+          MAIL_TO:  ${{ secrets.MAIL_TO }}
+          MAIL_BCC: ${{ secrets.MAIL_BCC }}
+        run: |
+          {
+            echo "<?php"
+            echo "\$TO  = '${MAIL_TO}';"
+            echo "\$BCC = '${MAIL_BCC}';"
+          } > mail_config.php
+
       - name: Deploy via FTP
         if: env.HAS_FTP == 'true'
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5

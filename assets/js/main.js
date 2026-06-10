@@ -3,11 +3,21 @@
   'use strict';
 
   /* ===========================================================
-   *  申込みフォームの送信先（SSGform等のエンドポイントURL）
-   *  例: "https://ssgform.com/s/xxxxxxxxxxxx"
-   *  ↓ 取得したURLをここに貼るだけで実送信が有効になります。
+   *  申込みフォームの送信先。
+   *  同フォルダの mail.php（ロリポップ／PHP）が申込み内容を
+   *  指定メールアドレスへ送信します。
+   *  ※GitHub Pagesプレビューでは動きません（PHP非対応）。
+   *    本番 houei-home.jp/lp-kari2606/ で動作します。
    * =========================================================== */
-  var FORM_ENDPOINT = "";
+  var FORM_ENDPOINT = "mail.php";
+
+  // PHPからのリダイレクト（JSが使われなかった場合の保険）で完了表示
+  if (/[?&]sent=1/.test(location.search)) {
+    var _f = document.getElementById('reserveForm');
+    var _t = document.getElementById('thanks');
+    if (_f) _f.hidden = true;
+    if (_t) _t.hidden = false;
+  }
 
   /* ---- 追従ナビ：一定スクロールで出現 ---- */
   var nav = document.getElementById('siteNav');
@@ -118,7 +128,7 @@
     fetch(FORM_ENDPOINT, {
       method: 'POST',
       body: new FormData(form),
-      headers: { 'Accept': 'application/json' }
+      headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' }
     }).then(function (res) {
       if (!res.ok) throw new Error('status ' + res.status);
       done();
