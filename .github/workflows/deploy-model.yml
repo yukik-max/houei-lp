@@ -1,8 +1,10 @@
-name: Deploy to FTP
+name: Deploy model LP to FTP
 
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'lp-model2607/**'
   workflow_dispatch:
 
 jobs:
@@ -26,7 +28,7 @@ jobs:
             echo "<?php"
             echo "\$TO  = '${MAIL_TO}';"
             echo "\$BCC = '${MAIL_BCC}';"
-          } > mail_config.php
+          } > lp-model2607/mail_config.php
 
       - name: Deploy via FTP
         if: env.HAS_FTP == 'true'
@@ -38,15 +40,12 @@ jobs:
           # ロリポップ！は明示的FTP over TLS（FTPS）
           protocol: ftps
           port: 21
-          # 公開ディレクトリ（宝栄サーバーのパス）。例: ./public_html/  ※末尾スラッシュ必須
-          server-dir: ${{ secrets.FTP_SERVER_DIR }}
-          local-dir: ./
-          # アップロード対象から除外（lp-model2607は別ワークフローで別ディレクトリへ）
+          # 展示場見学LPの公開ディレクトリ（FTPルート直下）
+          server-dir: /lp-model2607/
+          local-dir: ./lp-model2607/
+          # アップロード対象から除外
           exclude: |
             **/.git*
             **/.git*/**
-            **/.github/**
             **/README.md
             **/*.md
-            lp-model2607/**
-            **/lp-model2607/**
