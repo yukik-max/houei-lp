@@ -57,6 +57,21 @@
     });
   }
 
+  /* ---- 時間帯「その他」：選択したときだけ自由記入欄を出す ---- */
+  var timeOtherRadio = document.getElementById('timeOther');
+  var timeOtherWrap = document.getElementById('timeOtherWrap');
+  var timeOtherInput = document.getElementById('timeOtherInput');
+  function syncTimeOther(focus) {
+    if (!timeOtherWrap) return;
+    var on = !!(timeOtherRadio && timeOtherRadio.checked);
+    timeOtherWrap.hidden = !on;
+    if (on && focus && timeOtherInput) timeOtherInput.focus();
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('input[name="time"]'), function (r) {
+    r.addEventListener('change', function () { syncTimeOther(true); });
+  });
+  syncTimeOther(false);
+
   /* ---- フォーム検証＆送信 ---- */
   var form = document.getElementById('reserveForm');
   var thanks = document.getElementById('thanks');
@@ -78,6 +93,15 @@
     // 必須ラジオ
     if (!form.querySelector('input[name="venue"]:checked')) problems.push('会場');
     if (!form.querySelector('input[name="time"]:checked')) problems.push('時間帯');
+
+    // 時間帯「その他」を選んだときは自由記入欄も必須
+    if (timeOtherInput) {
+      timeOtherInput.classList.remove('invalid');
+      if (timeOtherRadio && timeOtherRadio.checked && !timeOtherInput.value.trim()) {
+        timeOtherInput.classList.add('invalid');
+        problems.push('ご希望の時間帯（その他）');
+      }
+    }
 
     // 予約希望日（カレンダー）
     var dateEl = form.elements['date'];

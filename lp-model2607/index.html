@@ -34,7 +34,7 @@
       <nav class="nav-links">
         <a href="#kodawari">こだわり＆価格</a>
         <a href="#voice">お施主さまの声</a>
-        <a href="#form">見学会申込み</a>
+        <a href="#shizai">安心の建築資材</a>
       </nav>
       <a href="#form" class="nav-cta">見学会を申込む</a>
     </div>
@@ -171,6 +171,13 @@
               <label class="opt"><input type="radio" name="time" value="14:00〜"><span>14:00〜</span></label>
               <label class="opt"><input type="radio" name="time" value="15:00〜"><span>15:00〜</span></label>
               <label class="opt"><input type="radio" name="time" value="16:00〜"><span>16:00〜</span></label>
+              <label class="opt"><input type="radio" name="time" value="17:00〜"><span>17:00〜</span></label>
+              <label class="opt"><input type="radio" name="time" value="その他" id="timeOther"><span>その他</span></label>
+            </div>
+            <div class="opt-other" id="timeOtherWrap" hidden>
+              <input type="text" name="time_other" id="timeOtherInput"
+                     placeholder="例）9:30ごろ／夕方以降でも可 など"
+                     aria-label="ご希望の時間帯（自由記入）" autocomplete="off">
             </div>
           </fieldset>
 
@@ -240,20 +247,29 @@
   <footer class="site-footer">
     <img class="foot-logo" src="assets/img/logo.png" alt="HOUEI ホーエーホーム">
     <p class="foot-name">株式会社宝栄工業　ホーエーホーム</p>
-    <p class="foot-free"><a href="tel:0120188578">0120-188-578</a></p>
-    <p class="foot-hours">受付 10:00〜18:00／定休日：水曜日・木曜日</p>
-    <div class="foot-offices">
-      <div class="foot-office">
-        <p class="foot-office-name">柳川展示場（本社）</p>
-        <p class="foot-office-addr">〒832-0826　福岡県柳川市三橋町高畑210-2</p>
-        <p class="foot-office-tel">TEL <a href="tel:0944888378">0944-88-8378</a></p>
+
+    <!-- 展示場（画像バナー＋電話番号の透明タップ領域） -->
+    <div class="foot-showrooms">
+      <div class="foot-showroom">
+        <img src="assets/img/office_yanagawa.webp" width="2000" height="1000" loading="lazy"
+             alt="ホーエーホーム柳川展示場　0120-188-578／福岡県柳川市三橋町高畑210-2／受付 10:00〜18:00／定休日：水曜日・木曜日">
+        <a class="tel-hot" href="tel:0120188578" aria-label="柳川展示場に電話する（0120-188-578）"></a>
       </div>
-      <div class="foot-office">
-        <p class="foot-office-name">久留米展示場</p>
-        <p class="foot-office-addr">〒839-0863　福岡県久留米市国分町206-1</p>
-        <p class="foot-office-tel">TEL <a href="tel:0942545578">0942-54-5578</a></p>
+      <div class="foot-showroom">
+        <img src="assets/img/office_kurume.webp" width="2000" height="1000" loading="lazy"
+             alt="ホーエーホーム久留米展示場　0120-011-358／福岡県久留米市国分町206-1／受付 10:00〜18:00／定休日：水曜日・木曜日">
+        <a class="tel-hot" href="tel:0120011358" aria-label="久留米展示場に電話する（0120-011-358）"></a>
       </div>
     </div>
+
+    <!-- 本社 -->
+    <div class="foot-hq">
+      <p class="foot-hq-name">株式会社宝栄工業　本社</p>
+      <p class="foot-hq-addr">〒832-0058　福岡県柳川市上宮永町413</p>
+      <p class="foot-hq-tel">TEL <a href="tel:0944740663">0944-74-0663</a></p>
+      <p class="foot-hq-holiday">定休日：土曜日・日曜日</p>
+    </div>
+
     <p class="foot-copy">&copy; 2026 株式会社宝栄工業（ホーエーホーム）</p>
   </footer>
 

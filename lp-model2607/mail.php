@@ -32,6 +32,7 @@ if (!empty($_POST["_gotcha"])) { done(200, "OK", $isAjax); }
 
 function v($k) { return isset($_POST[$k]) ? trim((string)$_POST[$k]) : ""; }
 $venue = v("venue"); $date = v("date"); $time = v("time"); $name = v("name"); $tel = v("tel"); $email = v("email");
+$timeOther = v("time_other");
 $address = v("address"); $people = v("people"); $message = v("message");
 
 /* 必須チェック */
@@ -39,6 +40,7 @@ $errors = [];
 if ($venue === "") $errors[] = "会場";
 if ($date === "")  $errors[] = "予約希望日";
 if ($time === "")  $errors[] = "時間帯";
+if ($time === "その他" && $timeOther === "") $errors[] = "ご希望の時間帯（その他）";
 if ($name === "")  $errors[] = "お名前";
 if ($tel === "")   $errors[] = "電話番号";
 if ($email === "" || !filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = "メールアドレス";
@@ -52,11 +54,14 @@ if ($ts !== false) {
   $dateDisp = date("Y/n/j", $ts) . "（" . $wdays[(int)date("w", $ts)] . "）";
 }
 
+/* 時間帯：「その他」は自由記入の内容を添える */
+$timeDisp = ($time === "その他" && $timeOther !== "") ? "その他（{$timeOther}）" : $time;
+
 /* 本文 */
 $body  = "ホーエーホーム 展示場見学 のお申込みがありました。\n\n";
 $body .= "■ 会場　　　：{$venue}\n";
 $body .= "■ 予約希望日：{$dateDisp}\n";
-$body .= "■ 時間帯　　：{$time}\n";
+$body .= "■ 時間帯　　：{$timeDisp}\n";
 $body .= "■ お名前　　：{$name}\n";
 $body .= "■ 電話番号　：{$tel}\n";
 $body .= "■ メール　　：{$email}\n";
@@ -69,7 +74,7 @@ $body .= "ページ　：" . (isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_R
 
 if ($TO === "") { done(500, "送信先が未設定です。お手数ですがお電話ください。", $isAjax); }
 
-$subject = "【展示場見学申込み】{$name} 様（{$venue}・{$dateDisp} {$time}）";
+$subject = "【展示場見学申込み】{$name} 様（{$venue}・{$dateDisp} {$timeDisp}）";
 $headers  = "From: " . mb_encode_mimeheader($FROM_NAME) . " <{$FROM}>\r\n";
 $headers .= "Reply-To: " . mb_encode_mimeheader($name) . " <{$email}>\r\n";
 if ($BCC !== "") { $headers .= "Bcc: {$BCC}\r\n"; }
