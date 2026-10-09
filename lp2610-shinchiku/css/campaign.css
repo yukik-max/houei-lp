@@ -1,0 +1,102 @@
+@charset "UTF-8";
+/* キャンペーンLP用の追加スタイル（lp2026.css の上に重ねる） */
+
+:root { --red: #c8352b; }
+
+/* ========== ファーストビュー：期間バッジ ========== */
+.hero_period {
+    margin-top: 30px; display: inline-flex; align-items: stretch; align-self: flex-start;
+    border: 1px solid var(--gold); line-height: 1.5;
+}
+.hero_period_label { display: flex; align-items: center; padding: 10px 14px; background: var(--gold); color: var(--ink); font-size: 12px; font-weight: 700; letter-spacing: .14em; }
+.hero_period_body { padding: 8px 18px; font-family: var(--serif); font-size: 17px; letter-spacing: .08em; }
+.hero_period_body small { display: block; font-family: var(--sans); font-size: 11px; letter-spacing: .1em; color: rgba(255, 255, 255, .7); }
+.hero_title_em { color: var(--gold-light); }
+
+/* ========== キャンペーン特典 ========== */
+.campaign { padding: 120px 0; background: var(--white); }
+.campaign_grid { display: grid; grid-template-columns: 5fr 6fr; gap: clamp(36px, 5vw, 80px); align-items: start; }
+.campaign_flyer { position: sticky; top: calc(var(--header-h) + 32px); }
+.campaign_flyer button { display: block; width: 100%; cursor: zoom-in; box-shadow: 0 18px 50px rgba(0, 0, 0, .14); }
+.campaign_flyer_note { margin-top: 14px; text-align: center; font-size: 12px; letter-spacing: .12em; color: var(--muted); }
+
+.campaign_lead { font-family: var(--serif); font-size: clamp(18px, 1.8vw, 21px); line-height: 1.9; letter-spacing: .08em; color: var(--ink); }
+.campaign_main {
+    position: relative; margin-top: 34px; padding: 34px 32px 28px;
+    border: 1px solid var(--gold); background: var(--paper);
+}
+.campaign_main_label { position: absolute; top: -14px; left: 24px; padding: 0 14px; background: var(--green); color: var(--white); font-size: 12px; letter-spacing: .2em; line-height: 28px; }
+.campaign_main_title { font-family: var(--serif); font-weight: 600; font-size: clamp(24px, 2.8vw, 34px); line-height: 1.5; letter-spacing: .08em; color: var(--ink); }
+.campaign_main_title em { color: var(--red); }
+.campaign_main_note { margin-top: 12px; font-size: 12px; color: var(--muted); line-height: 1.8; }
+
+.gifts { margin-top: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; counter-reset: gift; }
+.gift { counter-increment: gift; position: relative; padding: 22px 20px 20px 62px; background: var(--white); border: 1px solid var(--line); line-height: 1.8; }
+.gift::before { content: counter(gift); position: absolute; left: 18px; top: 20px; width: 30px; height: 30px; border-radius: 50%; background: var(--gold); color: var(--white); font-family: var(--en); font-size: 18px; line-height: 30px; text-align: center; }
+.gift h3 { font-family: var(--serif); font-weight: 600; font-size: 17px; letter-spacing: .06em; color: var(--ink); line-height: 1.6; }
+.gift p { margin-top: 6px; font-size: 13px; color: var(--text); }
+
+.campaign_points { margin-top: 36px; border-top: 1px solid var(--ink); }
+.campaign_points li { position: relative; padding: 18px 0 18px 40px; border-bottom: 1px solid var(--line); font-size: 15px; line-height: 1.8; }
+.campaign_points li::before { content: ""; position: absolute; left: 6px; top: 24px; width: 16px; height: 9px; border-left: 2px solid var(--green); border-bottom: 2px solid var(--green); transform: rotate(-45deg); }
+.campaign_points em { font-weight: 700; color: var(--green); }
+
+.campaign_cta { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* ========== 開催日程 ========== */
+.schedule { padding: 110px 0; background: var(--paper-deep); }
+.schedule_list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.schedule_month { padding: 26px 24px; background: var(--white); }
+.schedule_month h3 { font-family: var(--en); font-size: 30px; line-height: 1.2; color: var(--gold); letter-spacing: .06em; }
+.schedule_month h3 small { margin-left: 6px; font-family: var(--sans); font-size: 12px; color: var(--muted); }
+.schedule_month ul { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+.schedule_month li { padding: 4px 12px; border: 1px solid var(--line); font-size: 14px; line-height: 1.8; }
+.schedule_note { margin-top: 24px; text-align: center; font-size: 13px; color: var(--muted); }
+
+/* ========== お悩み（解体LP） ========== */
+.worry { padding: 120px 0; }
+.worry_grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(36px, 5vw, 80px); align-items: center; }
+.worry_list { border-top: 1px solid var(--ink); }
+.worry_list li { position: relative; padding: 20px 0 20px 44px; border-bottom: 1px solid var(--line); font-family: var(--serif); font-size: 17px; letter-spacing: .06em; color: var(--ink); line-height: 1.7; }
+.worry_list li::before { content: ""; position: absolute; left: 4px; top: 24px; width: 20px; height: 20px; border: 1px solid var(--ink); }
+.worry_list li::after { content: ""; position: absolute; left: 9px; top: 26px; width: 12px; height: 7px; border-left: 2px solid var(--red); border-bottom: 2px solid var(--red); transform: rotate(-45deg); }
+.worry_list em { color: var(--red); }
+.worry_answer { padding: 40px 36px; background: var(--ink); color: var(--white); }
+.worry_answer .eyebrow { color: var(--gold-light); }
+.worry_answer_title { margin-top: 20px; font-family: var(--serif); font-weight: 500; font-size: clamp(22px, 2.4vw, 30px); line-height: 1.7; letter-spacing: .08em; }
+.worry_answer_title em { color: var(--gold-light); }
+.worry_answer p:last-child { margin-top: 18px; font-size: 14px; color: rgba(255, 255, 255, .82); }
+
+.merits { margin-top: 64px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.merit .frame { aspect-ratio: 4 / 3; }
+.merit h3 { margin-top: 16px; font-family: var(--serif); font-weight: 600; font-size: 17px; letter-spacing: .08em; color: var(--ink); line-height: 1.6; }
+.merit p { margin-top: 6px; font-size: 14px; line-height: 1.9; }
+
+/* ========== フォーム：セレクト・日付 ========== */
+.field select, .field input[type="date"] {
+    width: 100%; padding: 15px 16px; font: inherit; font-size: 16px; line-height: 1.6; color: var(--ink);
+    background: var(--paper); border: 1px solid transparent; border-bottom: 1px solid var(--ink); border-radius: 0;
+}
+.field select:focus, .field input[type="date"]:focus { outline: none; background: var(--white); border-color: var(--green); }
+.field select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%); background-position: calc(100% - 22px) 50%, calc(100% - 16px) 50%; background-size: 6px 6px; background-repeat: no-repeat; }
+
+/* ========== スマホ ========== */
+@media (max-width: 767px) {
+    .hero .eyebrow { gap: 10px; font-size: 14px; }
+    .hero .eyebrow::before { width: 24px; }
+    .hero .eyebrow_jp { padding-left: 10px; font-size: 11px; letter-spacing: .08em; white-space: nowrap; }
+    .hero_period { align-self: stretch; }
+    .hero_period_label { padding: 10px 12px; white-space: nowrap; }
+    .hero_period_body { padding: 8px 14px; font-size: 14px; letter-spacing: .02em; }
+    .campaign, .worry { padding: 80px 0; }
+    .schedule { padding: 72px 0; }
+    .campaign_grid, .worry_grid { grid-template-columns: 1fr; }
+    .campaign_flyer { position: static; width: 88%; margin-inline: auto; }
+    .campaign_main { padding: 30px 18px 22px; }
+    .gifts { grid-template-columns: 1fr; gap: 10px; }
+    .campaign_cta .btn { width: 100%; }
+    .schedule_list { grid-template-columns: 1fr; }
+    .worry_list li { font-size: 15px; }
+    .worry_answer { padding: 32px 22px; }
+    .merits { grid-template-columns: 1fr; gap: 32px; margin-top: 48px; }
+}

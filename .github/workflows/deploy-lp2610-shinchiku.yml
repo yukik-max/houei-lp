@@ -1,0 +1,51 @@
+name: Deploy 新築工事応援キャンペーンLP (lp2610-shinchiku) to FTP
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'lp2610-shinchiku/**'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # FTPのSecret(FTP_SERVER)が未設定の間はデプロイ手順をスキップ（エラーにしない）
+    env:
+      HAS_FTP: ${{ secrets.FTP_SERVER != '' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 通知先メールをSecretから生成（リポジトリには含めない）
+      - name: Generate mail config
+        if: env.HAS_FTP == 'true'
+        env:
+          MAIL_TO:  ${{ secrets.MAIL_TO }}
+          MAIL_BCC: ${{ secrets.MAIL_BCC }}
+        run: |
+          {
+            echo "<?php"
+            echo "\$TO  = '${MAIL_TO}';"
+            echo "\$BCC = '${MAIL_BCC}';"
+          } > lp2610-shinchiku/mail_config.php
+
+      - name: Deploy via FTP
+        if: env.HAS_FTP == 'true'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server:   ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # ロリポップ！は明示的FTP over TLS（FTPS）
+          protocol: ftps
+          port: 21
+          # 新築工事応援キャンペーンLP（2026-10）の公開ディレクトリ（FTPルート直下）
+          server-dir: /lp2610-shinchiku/
+          local-dir: ./lp2610-shinchiku/
+          # アップロード対象から除外
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/README.md
+            **/*.md
