@@ -100,3 +100,10 @@
     .worry_answer { padding: 32px 22px; }
     .merits { grid-template-columns: 1fr; gap: 32px; margin-top: 48px; }
 }
+
+/* 家づくり写真（横長の外観写真）・緑の柱のロゴ画像 */
+.feature_visual--wide .frame { aspect-ratio: 3 / 2; }
+.feature_visual--wide::before { width: 40%; height: 55%; }
+.pillar_visual--logo { padding: 48px 24px; }
+.pillar_visual--logo img { width: 200px; max-width: 60%; margin: 0; }
+@media (max-width: 767px) { .feature_visual--wide { width: 100%; } }
