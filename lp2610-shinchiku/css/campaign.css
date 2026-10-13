@@ -100,3 +100,11 @@
     .worry_answer { padding: 32px 22px; }
     .merits { grid-template-columns: 1fr; gap: 32px; margin-top: 48px; }
 }
+
+/* 週替わりLP：開催日1週分だけを表示 */
+.schedule_list--single { grid-template-columns: 1fr; max-width: 560px; margin-inline: auto; text-align: center; }
+.schedule_list--single ul { justify-content: center; }
+.schedule_list--single li { padding: 8px 22px; font-family: var(--serif); font-size: 20px; }
+.schedule_weekday { margin-top: 16px; font-size: 14px; color: var(--green); font-weight: 700; }
+.entry_note_date { white-space: nowrap; }
+@media (max-width: 767px) { .entry_note_date { font-size: 15px; letter-spacing: .04em; } }

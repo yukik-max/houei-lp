@@ -24,8 +24,12 @@ $isAjax = (isset($_SERVER["HTTP_X_REQUESTED_WITH"]) && strtolower($_SERVER["HTTP
 function done($code, $msg, $isAjax) {
   if ($isAjax) { http_response_code($code); echo $msg; }
   else {
-    if ($code === 200) { header("Location: ./?sent=1#form"); }
-    else { http_response_code($code); echo "<meta charset=utf-8>" . htmlspecialchars($msg) . "<br><a href='./#form'>戻る</a>"; }
+    /* 週替わりLP（サブフォルダ）から送られた場合はそのページへ戻す */
+    $back = "./";
+    $ref = isset($_SERVER["HTTP_REFERER"]) ? parse_url($_SERVER["HTTP_REFERER"], PHP_URL_PATH) : "";
+    if (is_string($ref) && preg_match('#^/lp2610-shinchiku/[0-9]{4}/$#', $ref)) { $back = $ref; }
+    if ($code === 200) { header("Location: {$back}?sent=1#form"); }
+    else { http_response_code($code); echo "<meta charset=utf-8>" . htmlspecialchars($msg) . "<br><a href='{$back}#form'>戻る</a>"; }
   }
   exit;
 }
