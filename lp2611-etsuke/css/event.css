@@ -1,0 +1,32 @@
+@charset "UTF-8";
+/* 絵付け体験イベントLP用の追加スタイル（campaign.css の上に重ねる） */
+
+/* ========== おすすめ ========== */
+.recommend_title { margin-top: 40px; font-family: var(--serif); font-weight: 600; font-size: 18px; letter-spacing: .08em; color: var(--ink); }
+.recommend_title + .campaign_points { margin-top: 14px; }
+
+/* ========== 開催概要 ========== */
+.outline { padding: 110px 0; background: var(--paper-deep); }
+.outline_list { border-top: 1px solid var(--ink); background: var(--white); }
+.outline_list > div { display: grid; grid-template-columns: 9em 1fr; border-bottom: 1px solid var(--line); }
+.outline_list dt { padding: 22px 24px; font-family: var(--serif); font-weight: 600; letter-spacing: .2em; color: var(--green); background: var(--paper); }
+.outline_list dd { margin: 0; padding: 22px 24px; font-size: 16px; line-height: 1.9; color: var(--ink); }
+.outline_list dd strong { font-family: var(--serif); font-size: 20px; letter-spacing: .08em; }
+.outline_list dd small { display: block; font-size: 13px; color: var(--muted); }
+.outline_part { display: inline-block; margin-right: 10px; padding: 0 10px; background: var(--green); color: var(--white); font-size: 12px; letter-spacing: .1em; line-height: 24px; vertical-align: 2px; }
+.outline_part:nth-of-type(2) { margin-left: 22px; }
+.outline_free { color: var(--red); }
+.outline_limit { display: inline-block; margin-left: 12px; padding: 0 10px; border: 1px solid var(--red); color: var(--red); font-size: 13px; line-height: 24px; }
+.outline_note { margin-top: 28px; text-align: center; font-family: var(--serif); font-size: 17px; letter-spacing: .08em; color: var(--ink); }
+.campaign_cta--center { justify-content: center; }
+
+/* ========== 会場（1か所） ========== */
+.venue_list--single { grid-template-columns: 1fr; }
+
+@media (max-width: 767px) {
+    .outline { padding: 72px 0; }
+    .outline_list > div { grid-template-columns: 1fr; }
+    .outline_list dt { padding: 10px 16px; }
+    .outline_list dd { padding: 14px 16px 18px; }
+    .outline_part:nth-of-type(2) { margin-left: 0; margin-top: 6px; }
+}
