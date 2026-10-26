@@ -36,7 +36,7 @@ if (!empty($_POST["_gotcha"])) { done(200, "OK", $isAjax); }
 /* 改行を除去（メールヘッダへの混入防止）。自由記入欄のみ改行を残す */
 function v($k) { return isset($_POST[$k]) ? trim(str_replace(["\r", "\n"], " ", (string)$_POST[$k])) : ""; }
 $date = v("date"); $time = v("time"); $adults = v("adults"); $kids = v("kids"); $ages = v("ages");
-$name = v("name"); $kana = v("kana"); $tel = v("tel"); $email = v("email"); $source = v("source");
+$name = v("name"); $kana = v("kana"); $address = v("address"); $tel = v("tel"); $email = v("email"); $source = v("source");
 $message = isset($_POST["message"]) ? trim((string)$_POST["message"]) : "";
 
 /* 必須チェック */
@@ -45,6 +45,7 @@ if ($time === "")   $errors[] = "ご希望の時間帯";
 if ($adults === "") $errors[] = "参加人数（大人）";
 if ($name === "")   $errors[] = "お名前";
 if ($kana === "")   $errors[] = "ふりがな";
+if ($address === "") $errors[] = "ご住所";
 if ($tel === "")    $errors[] = "電話番号";
 if ($email === "" || !filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = "メールアドレス";
 if ($source === "") $errors[] = "お申込みのきっかけ";
@@ -58,6 +59,7 @@ $body .= "■ 参加人数　　：大人 {$adults}／お子さま " . ($kids !=
 if ($ages !== "") $body .= "■ お子さまの年齢：{$ages}\n";
 $body .= "■ お名前　　　：{$name}\n";
 $body .= "■ ふりがな　　：{$kana}\n";
+$body .= "■ ご住所　　　：{$address}\n";
 $body .= "■ 電話番号　　：{$tel}\n";
 $body .= "■ メール　　　：{$email}\n";
 $body .= "■ きっかけ　　：{$source}\n";
