@@ -68,5 +68,8 @@ $headers  = "From: " . mb_encode_mimeheader($FROM_NAME) . " <{$FROM}>\r\n";
 $headers .= "Reply-To: " . mb_encode_mimeheader($name) . " <{$email}>\r\n";
 if ($BCC !== "") { $headers .= "Bcc: {$BCC}\r\n"; }
 
-if (mb_send_mail($TO, $subject, $body, $headers)) { done(200, "OK", $isAjax); }
+/* エンベロープ送信者を houei-home.jp にして SPF を通す（未指定だとサーバー既定の送信者になり、Gmail 等で拒否・迷惑メール扱いになる） */
+$ENVELOPE_FROM = "info@houei-home.jp";
+
+if (mb_send_mail($TO, $subject, $body, $headers, "-f {$ENVELOPE_FROM}")) { done(200, "OK", $isAjax); }
 else { done(500, "送信に失敗しました。お手数ですがお電話ください。", $isAjax); }
