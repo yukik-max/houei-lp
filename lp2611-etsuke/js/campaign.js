@@ -80,8 +80,12 @@
             return res.text().then(function (t) {
                 if (!res.ok) throw new Error(t || ('status ' + res.status));
                 window.dataLayer = window.dataLayer || [];
-                window.dataLayer.push({ event: form.getAttribute('data-event') || 'lp_form_sent' });
-                showThanks();
+                // 完了ページ（mail.php と同じフォルダの thanks.html）へ移動。GTM の送信イベントを待ってから移る
+                var thanksUrl = new URL('thanks.html', form.action).href;
+                var moved = false;
+                var goThanks = function () { if (!moved) { moved = true; location.href = thanksUrl; } };
+                window.dataLayer.push({ event: form.getAttribute('data-event') || 'lp_form_sent', eventCallback: goThanks, eventTimeout: 1500 });
+                setTimeout(goThanks, 1500);
             });
         }).catch(function (err) {
             btn.disabled = false;

@@ -131,7 +131,8 @@
       headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' }
     }).then(function (res) {
       if (!res.ok) throw new Error('status ' + res.status);
-      done();
+      // 完了ページ（mail.php と同じフォルダの thanks.html）へ移動
+      location.href = new URL('thanks.html', new URL(FORM_ENDPOINT, location.href)).href;
     }).catch(function (err) {
       console.error(err);
       showError('送信に失敗しました。時間をおいて再度お試しいただくか、お電話でお問い合わせください。');

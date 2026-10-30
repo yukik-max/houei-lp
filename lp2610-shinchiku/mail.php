@@ -28,7 +28,7 @@ function done($code, $msg, $isAjax) {
     $back = "./";
     $ref = isset($_SERVER["HTTP_REFERER"]) ? parse_url($_SERVER["HTTP_REFERER"], PHP_URL_PATH) : "";
     if (is_string($ref) && preg_match('#^/lp2610-shinchiku/[0-9]{4}/$#', $ref)) { $back = $ref; }
-    if ($code === 200) { header("Location: {$back}?sent=1#form"); }
+    if ($code === 200) { header("Location: thanks.html"); }
     else { http_response_code($code); echo "<meta charset=utf-8>" . htmlspecialchars($msg) . "<br><a href='{$back}#form'>戻る</a>"; }
   }
   exit;

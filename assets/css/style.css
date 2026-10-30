@@ -250,3 +250,10 @@ textarea{resize:vertical}
 @media (max-width:380px){
   .floating-cta{padding:14px 30px;font-size:15px}
 }
+
+/* 送信完了ページ（thanks.html） */
+.thanks-page { min-height: 70vh; padding: 48px 16px 64px; font-size: 16px; }
+.thanks-logo { text-align: center; margin: 0 0 32px; }
+.thanks-logo img { height: 48px; width: auto; }
+.thanks-back { text-align: center; margin: 28px 0 0; }
+.thanks-back a { display: inline-block; padding: 14px 32px; border-radius: 999px; background: var(--green); color: #fff; font-weight: 700; text-decoration: none; }

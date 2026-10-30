@@ -438,3 +438,8 @@ em { font-style: normal; }
     .reveal { opacity: 1; transform: none; transition: none; }
     .hero_visual img { transition: opacity .6s; transform: none; }
 }
+
+/* 送信完了ページ（thanks.html） */
+.entry--thanks { min-height: calc(100vh - 160px); padding-top: 140px; }
+.entry--thanks .entry_thanks { margin-top: 0; }
+.entry_back { margin-top: 32px; text-align: center; }

@@ -21,7 +21,7 @@ $isAjax = (isset($_SERVER["HTTP_X_REQUESTED_WITH"]) && strtolower($_SERVER["HTTP
 function done($code, $msg, $isAjax) {
   if ($isAjax) { http_response_code($code); echo $msg; }
   else {
-    if ($code === 200) { header("Location: ./?sent=1#form"); }
+    if ($code === 200) { header("Location: thanks.html"); }
     else { http_response_code($code); echo "<meta charset=utf-8>" . htmlspecialchars($msg) . "<br><a href='./#form'>戻る</a>"; }
   }
   exit;
