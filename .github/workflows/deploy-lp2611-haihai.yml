@@ -1,0 +1,56 @@
+name: Deploy ハイハイレースLP (lp2611-haihai) to FTP
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'lp2611-haihai/**'
+      - '.github/scripts/test_haihai_capacity.sh'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # FTPのSecret(FTP_SERVER)が未設定の間はデプロイ手順をスキップ（エラーにしない）
+    env:
+      HAS_FTP: ${{ secrets.FTP_SERVER != '' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 定員（各回20組）の制御テスト。失敗したらデプロイしない
+      - name: Test capacity limit
+        run: bash .github/scripts/test_haihai_capacity.sh
+
+      # 通知先メールをSecretから生成（リポジトリには含めない）
+      - name: Generate mail config
+        if: env.HAS_FTP == 'true'
+        env:
+          MAIL_TO:  ${{ secrets.MAIL_TO }}
+          MAIL_BCC: ${{ secrets.MAIL_BCC }}
+        run: |
+          {
+            echo "<?php"
+            echo "\$TO  = '${MAIL_TO}';"
+            echo "\$BCC = '${MAIL_BCC}';"
+          } > lp2611-haihai/mail_config.php
+
+      - name: Deploy via FTP
+        if: env.HAS_FTP == 'true'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server:   ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # ロリポップ！は明示的FTP over TLS（FTPS）
+          protocol: ftps
+          port: 21
+          # ハイハイレースLP（2026-11-29開催）の公開ディレクトリ（FTPルート直下）
+          server-dir: /lp2611-haihai/
+          local-dir: ./lp2611-haihai/
+          # アップロード対象から除外
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/README.md
+            **/*.md
